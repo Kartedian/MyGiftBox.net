@@ -43,3 +43,20 @@ foreach ($prestations as $prestation) {
         )
     );
 }
+
+
+function findPrestationById(String $id): ?Prestation
+{
+    return Prestation::query()->find($id);
+
+}
+
+$test = findPrestationById("01d57b87-8c0f-4ef1-8ce5-b6b82d4a8ec5");
+
+if ($test === null) {
+    fwrite(STDERR, "Prestation ID 01d57b87-8c0f-4ef1-8ce5-b6b82d4a8ec5 introuvable\n");
+} else {
+    fwrite(STDOUT, "Test ID 01d57b87-8c0f-4ef1-8ce5-b6b82d4a8ec5 : " . $test->libelle . " / " . $test->description . " / " . $test->unite . " / " . $test->tarif . "\n\n");
+}
+
+
