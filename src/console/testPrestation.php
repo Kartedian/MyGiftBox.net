@@ -47,7 +47,7 @@ foreach ($prestations as $prestation) {
 
 function findPrestationById(String $id): ?Prestation
 {
-    return Prestation::query()->find($id);
+    return Prestation::findOrFail($id);
 
 }
 
