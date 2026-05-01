@@ -2,6 +2,3 @@
 .ddev
 /vendor/
 *.ini
-.json
-.lock
-.gitignore
