@@ -7,4 +7,8 @@ class Categorie extends Model
     protected $table = 'categorie';
     protected $primaryKey = 'id';
     public $timestamps = false;
+
+    function prestations(){
+        return $this->hasMany(Prestation::class);
+    }
 }
