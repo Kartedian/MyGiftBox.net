@@ -20,6 +20,7 @@ class ComposerStaticInit69ad6621b0f20873af1b6a2d5836046e
         'f625ee536139dfb962a398b200bdb2bd' => __DIR__ . '/..' . '/illuminate/support/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     );
 
@@ -37,10 +38,14 @@ class ComposerStaticInit69ad6621b0f20873af1b6a2d5836046e
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\Clock\\' => 24,
+            'Slim\\' => 5,
         ),
         'P' =>
         array (
             'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Server\\' => 16,
+            'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Clock\\' => 10,
             'PhpParser\\' => 10,
@@ -55,6 +60,10 @@ class ComposerStaticInit69ad6621b0f20873af1b6a2d5836046e
             'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
+        ),
+        'F' =>
+        array (
+            'FastRoute\\' => 10,
         ),
         'D' =>
         array (
@@ -106,9 +115,27 @@ class ComposerStaticInit69ad6621b0f20873af1b6a2d5836046e
         array (
             0 => __DIR__ . '/..' . '/symfony/clock',
         ),
+        'Slim\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/slim/slim/Slim',
+        ),
         'Psr\\SimpleCache\\' =>
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Psr\\Http\\Server\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-server-middleware/src',
+            1 => __DIR__ . '/..' . '/psr/http-server-handler/src',
+        ),
+        'Psr\\Http\\Message\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Container\\' =>
         array (
@@ -145,6 +172,10 @@ class ComposerStaticInit69ad6621b0f20873af1b6a2d5836046e
         'Illuminate\\Container\\' =>
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'FastRoute\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/nikic/fast-route/src',
         ),
         'Dwm\\MyGiftBox\\' =>
         array (
