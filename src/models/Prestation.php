@@ -10,6 +10,6 @@ class Prestation extends Model
 
     function categorie()
     {
-        return $this->belongsTo(Categorie::class, 'categorie_id', 'id');
+        return $this->belongsTo(Categorie::class, 'cat_id', 'id');
     }
 }
