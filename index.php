@@ -19,9 +19,11 @@ if ($config !== false) {
 $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
+$app->setBasePath('/MyGiftBox.net');
 $app->addErrorMiddleware(true, true, true);
 
+
 $routes = require_once __DIR__ . '/conf/Routes.php';
-$routes($app);
+$app = $routes($app);
 
 $app->run();
