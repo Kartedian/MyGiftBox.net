@@ -17,12 +17,16 @@ if ($config !== false) {
     $db->bootEloquent();
 }
 
+$config = parse_ini_file(__DIR__ . '/conf/config.ini');
+
 $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
+$app->setBasePath($config['BasePath']);
 $app->addErrorMiddleware(true, true, true);
 
+
 $routes = require_once __DIR__ . '/conf/Routes.php';
-$routes($app);
+$app = $routes($app);
 
 $app->run();
