@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/vendor/autoload.php';
-
 use Slim\Factory\AppFactory;
 use Illuminate\Database\Capsule\Manager as DB;
+
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/src/conf/bootstrap.php';
 
 
 $config = parse_ini_file(__DIR__ . '/conf/confdb.ini');
