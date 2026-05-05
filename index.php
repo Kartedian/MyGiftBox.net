@@ -19,7 +19,6 @@ if ($config !== false) {
 $app = AppFactory::create();
 
 $app->addRoutingMiddleware();
-$app->setBasePath('/MyGiftBox.net');
 $app->addErrorMiddleware(true, true, true);
 
 

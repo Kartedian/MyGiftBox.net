@@ -1,5 +1,5 @@
 <?php
-namespace MyGiftBox\Controllers;
+namespace Dwm\MyGiftBox\controllers;
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
