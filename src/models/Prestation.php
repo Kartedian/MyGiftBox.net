@@ -1,5 +1,5 @@
 <?php
-namespace MyGiftBox\Models;
+namespace Dwm\MyGiftBox\models;
 use Illuminate\Database\Eloquent\Model;
 
 class Prestation extends Model

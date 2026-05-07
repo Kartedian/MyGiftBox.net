@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../models/Categorie.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
-use MyGiftBox\Models\Categorie;
+use Dwm\MyGiftBox\Models\Categorie;
 
 $config = parse_ini_file(__DIR__ . '/../../conf/confdb.ini');
 
