@@ -9,6 +9,6 @@ class Categorie extends Model
     public $timestamps = false;
 
     function prestations(){
-        return $this->hasMany(Prestation::class);
+        return $this->hasMany(Prestation::class, 'cat_id', 'id');
     }
 }
