@@ -10,12 +10,13 @@ class CategorieListeController
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $categories = Categorie::orderBy('id')->get(['id', 'libelle']);
-
+        $conf = parse_ini_file(__DIR__ . '/../../conf/conf.ini');
+        $BasePath = $conf['BasePath'] ?? '';
         $items = '';
         foreach ($categories as $cat) {
-            $id      = $cat->id;
+            $id = $cat->id;
             $libelle = $cat->libelle;
-            $items  .= "<li><a href=\"/categorie/{$id}\">{$libelle}</a></li>\n";
+            $items .= "<li><a href=\"{$BasePath}/categorie/{$id}\">{$libelle}</a></li>\n";
         }
 
         $html = <<<HTML
