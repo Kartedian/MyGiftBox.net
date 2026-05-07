@@ -11,4 +11,12 @@ class Coffret2presta extends Model
     public $incrementing = false;
     protected  $keyType = 'string';
 
+    function coffret()
+    {
+        return $this->belongsTo(Coffret::class, 'coffret_id', 'id');
+    }
+
+    function coffret_type(){
+        return $this->belongsTo(Coffret_type::class, 'coffret_id', 'id');
+    }
 }
