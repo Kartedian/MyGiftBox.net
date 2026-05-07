@@ -12,4 +12,14 @@ class Coffret_type extends Model
     function theme(){
         return $this->belongsTo(Theme::class, 'theme_id', 'id');
     }
+
+    function themes(){
+        return $this->belongsToMany(theme::class, 'coffret_type', 'theme_id', 'id');
+    }
+
+    function prestations(){
+        return $this->belongsToMany(Prestation::class, 'coffret2presta', 'coffret_id', 'presta_id');
+    }
+
+
 }
