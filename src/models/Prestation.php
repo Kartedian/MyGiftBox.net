@@ -12,4 +12,12 @@ class Prestation extends Model
     {
         return $this->belongsTo(Categorie::class, 'cat_id', 'id');
     }
+
+    function coffrets(){
+        return $this->belongsToMany(Coffret::class, 'coffret2presta', 'presta_id', 'coffret_id');
+    }
+
+    function coffrets_type(){
+        return $this->belongsToMany(Coffret_type::class, 'coffret2presta', 'presta_id', 'coffret_id');
+    }
 }
