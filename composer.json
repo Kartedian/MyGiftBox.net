@@ -10,7 +10,6 @@
         "php": "^8.2",
         "slim/slim": "4.*",
         "slim/psr7": "^1.8",
-        "twig/twig": "^3.0",
         "slim/twig-view": "^3.4"
     },
     "require-dev": {
