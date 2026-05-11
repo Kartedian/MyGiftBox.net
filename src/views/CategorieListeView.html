@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Liste des catégories</title>
+    </head>
+    <body>
+        <h1>Liste des catégories</h1>
+        <ul>
+            {% for c in categorie_liste %}
+                <li>
+                    <a href="{{c.basepath}}/categorie/{{ c.id }}">{{ c.libelle }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
