@@ -15,18 +15,13 @@ class CategorieListeController
     {
         $categorie_liste = Categorie::orderBy('id')->get(['id', 'libelle']);
         $conf = parse_ini_file(__DIR__ . '/../../conf/conf.ini');
-        $BasePath = $conf['BasePath'] ?? '';
-        $items = '';
-        foreach ($categorie_liste as $c) {
-            $basepath = $BasePath;
-            $id = $c->id;
-            $libelle = $c->libelle;
-        }
+        $basepath = $conf['BasePath'] ?? '';
 
         $view = Twig::fromRequest($request);
         
         return $view->render($response, 'CategorieListeView.html', [
             'categorie_liste' => $categorie_liste,
+            'basepath' => $basepath,
         ]);
     }
 }
