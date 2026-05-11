@@ -1,6 +1,8 @@
 <?php
 use Slim\Factory\AppFactory;
 use Illuminate\Database\Capsule\Manager as DB;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
 
 $config = parse_ini_file(__DIR__ . '/confdb.ini');
 if ($config !== false) {
@@ -13,6 +15,9 @@ if ($config !== false) {
 $config = parse_ini_file(__DIR__ . '/conf.ini');
 
 $app = AppFactory::create();
+
+$twig = Twig::create(__DIR__ . '/../src/views', ['cache' => false]);
+$app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();
 $app->setBasePath($config['BasePath']);
