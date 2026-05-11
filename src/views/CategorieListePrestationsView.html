@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Prestations</title>
+</head>
+<body>
+<h1>{{libelle}}: Liste des Prestations</h1>
+<ul>
+    {% for p in prestation_liste %}
+    <li>
+        <a href="{{basepath}}/categorie/{{id}}/prestation/{{p.id}}">{{p.libelle}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
