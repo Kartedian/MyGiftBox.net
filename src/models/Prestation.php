@@ -8,6 +8,8 @@ class Prestation extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
+    public $keyType = 'string';
+
     function categorie()
     {
         return $this->belongsTo(Categorie::class, 'cat_id', 'id');
