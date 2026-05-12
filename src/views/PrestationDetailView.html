@@ -1,0 +1,17 @@
+{% extends "base.twig" %}
+
+{% block title %}Catégorie {{ id }}{% endblock %}
+
+{% block content %}
+    <h1>La Prestation {{ id }}</h1>
+    <h2>{{ libelle }}</h2>
+    <h3>Description:</h3>
+    <p>{{ description }}</p>
+    <h3>Url:</h3>
+    <p>{{ url }}</p>
+    <h3>Unite:</h3>
+    <p>{{ unite }}</p>
+    <h3>Tarif:</h3>
+    <p>{{ tarif }}</p>
+
+{% endblock %}
