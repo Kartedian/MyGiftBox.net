@@ -1,11 +1,9 @@
-<html>
-<head>
-    <title>Categorie {{ id }}</title>
-</head>
-<body>
-<h1>la Categorie {{ id }}</h1>
-<h2>{{ libelle }}</h2>
-<p>{{ description }}</p>
+{% extends "base.twig" %}
 
-</body>
-</html>
+{% block title %}Catégorie {{ id }}{% endblock %}
+
+{% block content %}
+    <h1>La Catégorie {{ id }}</h1>
+    <h2>{{ libelle }}</h2>
+    <p>{{ description }}</p>
+{% endblock %}
