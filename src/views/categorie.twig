@@ -6,4 +6,7 @@
     <h1>La Catégorie {{ id }}</h1>
     <h2>{{ libelle }}</h2>
     <p>{{ description }}</p>
+    <ul>
+        <li><a href="{{ url_for('categ2presta', {'id': id}) }}">Liste des prestations</a></li>
+    </ul>
 {% endblock %}
