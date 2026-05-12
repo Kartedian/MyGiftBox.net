@@ -1,6 +1,8 @@
 <?php
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+
+use Dwm\MyGiftBox\controllers\CategoriePrestationListeController;
+use Dwm\MyGiftBox\controllers\PrestationDetailController;
+use Dwm\MyGiftBox\controllers\PrestationListeController;
 use Dwm\MyGiftBox\controllers\CategorieListeController;
 use Dwm\MyGiftBox\controllers\CategorieDetailController;
 use Dwm\MyGiftBox\controllers\PrestationController;
