@@ -23,12 +23,12 @@ class CategorieDetailController
         } catch (ModelNotFoundException $e) {
             throw new HttpInternalServerErrorException($request, "Erreur lors de la récupération de la catégorie avec l'identifiant {$id}.");
         }
-        
+
         $view = Twig::fromRequest($request);
         return $view->render($response, 'categorie.twig', [
             'id' => $categorie->id,
             'libelle' => $categorie->libelle,
-            'description' => $categorie->description
+            'description' => $categorie->description,
         ]);
 
     }
