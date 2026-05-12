@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Prestations</title>
+</head>
+<body>
+<h1>Liste des Prestations</h1>
+<ul>
+    {% for p in prestation_liste %}
+    <li>
+        <a href="{{ url_for('prestation_detail', {'id': p.id}) }}">{{ p.libelle }}</a>
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
