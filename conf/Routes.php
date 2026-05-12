@@ -5,7 +5,6 @@ use Dwm\MyGiftBox\controllers\PrestationDetailController;
 use Dwm\MyGiftBox\controllers\PrestationListeController;
 use Dwm\MyGiftBox\controllers\CategorieListeController;
 use Dwm\MyGiftBox\controllers\CategorieDetailController;
-use Dwm\MyGiftBox\controllers\PrestationController;
 use Dwm\MyGiftBox\controllers\AccueilController;
 
 return function (\slim\App $app): \Slim\App {
