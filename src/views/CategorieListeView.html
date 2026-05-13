@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Liste des catégories</title>
-    </head>
-    <body>
-        <h1>Liste des catégories</h1>
-        <ul>
-            {% for c in categorie_liste %}
-                <li>
-                    <a href="{{ url_for('categorie_detail', {'id': c.id}) }}">{{ c.libelle }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends "base.twig" %}
+
+{% block title %}Liste des catégories - MyGiftBox{% endblock %}
+
+{% block content %}
+    <h1>Liste des catégories</h1>
+    <ul>
+        {% for c in categorie_liste %}
+            <li>
+                <a href="{{ url_for('categorie_detail', {'id': c.id}) }}">{{ c.libelle }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
