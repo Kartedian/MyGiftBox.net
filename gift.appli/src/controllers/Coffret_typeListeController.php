@@ -14,14 +14,11 @@ class Coffret_typeListeController
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $coffret_type_liste = Coffret_type::orderBy('id')->get(['id', 'libelle']);
-        $conf = parse_ini_file(__DIR__ . '/../../conf/conf.ini');
-        $basepath = $conf['BasePath'] ?? '';
 
         $view = Twig::fromRequest($request);
         
         return $view->render($response, 'Coffret_typeListeView.html', [
             'coffret_type_liste' => $coffret_type_liste,
-            'basepath' => $basepath,
         ]);
     }
 }

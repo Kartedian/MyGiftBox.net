@@ -12,15 +12,12 @@ if ($config !== false) {
     $db->bootEloquent();
 }
 
-$config = parse_ini_file(__DIR__ . '/conf.ini');
-
 $app = AppFactory::create();
 
 $twig = Twig::create(__DIR__ . '/../src/views', ['cache' => false]);
 $app->add(TwigMiddleware::create($app, $twig));
 
 $app->addRoutingMiddleware();
-$app->setBasePath($config['BasePath']);
 $app->addErrorMiddleware(true, true, true);
 
 

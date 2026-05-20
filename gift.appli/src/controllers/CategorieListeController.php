@@ -14,14 +14,11 @@ class CategorieListeController
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $categorie_liste = Categorie::orderBy('id')->get(['id', 'libelle']);
-        $conf = parse_ini_file(__DIR__ . '/../../conf/conf.ini');
-        $basepath = $conf['BasePath'] ?? '';
 
         $view = Twig::fromRequest($request);
         
         return $view->render($response, 'CategorieListeView.html', [
             'categorie_liste' => $categorie_liste,
-            'basepath' => $basepath,
         ]);
     }
 }
