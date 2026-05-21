@@ -1,5 +1,7 @@
 <?php
-namespace Dwm\MyGiftBox\models;
+
+namespace Dwm\MyGiftBox\infrastructure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Categorie extends Model
@@ -8,7 +10,8 @@ class Categorie extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    function prestations(){
+    public function prestations()
+    {
         return $this->hasMany(Prestation::class, 'cat_id', 'id');
     }
 }

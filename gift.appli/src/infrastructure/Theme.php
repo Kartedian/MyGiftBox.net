@@ -1,6 +1,7 @@
 <?php
 
-namespace Dwm\MyGiftBox\models;
+namespace Dwm\MyGiftBox\infrastructure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Theme extends Model
@@ -9,8 +10,8 @@ class Theme extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    function coffrets_type()
+    public function coffrets_type()
     {
-        return $this->HasMany(Coffret_type::class, 'theme_id', 'id');
+        return $this->hasMany(Coffret_type::class, 'theme_id', 'id');
     }
 }

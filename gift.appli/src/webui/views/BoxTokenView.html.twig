@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Accès à la box – {{ box.libelle }}</title>
+</head>
+<body>
+<h1>Partager votre box « {{ box.libelle }} »</h1>
+
+<p>
+    Transmettez le lien ci-dessous au bénéficiaire pour qu'il puisse consulter
+    le contenu de la box :
+</p>
+
+{% set lien = url_for('box_detail', {'token': token}) %}
+<p>
+    <strong>Lien d'accès :</strong><br>
+    <a href="{{ lien }}">{{ lien }}</a>
+</p>
+
+<p><em>Ce lien est personnel et ne doit être partagé qu'avec le destinataire.</em></p>
+
+<p><a href="{{ lien }}">Accéder à la box</a></p>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <?php
 
-namespace Dwm\MyGiftBox\models;
+namespace Dwm\MyGiftBox\infrastructure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Coffret extends Model
@@ -9,7 +10,8 @@ class Coffret extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
 
-    function prestations(){
+    public function prestations()
+    {
         return $this->belongsToMany(Prestation::class, 'coffret2presta', 'coffret_id', 'presta_id');
     }
 }
