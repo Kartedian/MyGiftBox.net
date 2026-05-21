@@ -30,6 +30,8 @@ services:
       - .database_env
     ports:
       - "3306:3306"
+    volumes:
+      - voldb:/var/lib/mysql
     networks:
       gift.net:
         aliases:
@@ -42,3 +44,5 @@ services:
     networks:
       - gift.net
 
+volumes:
+  voldb:
