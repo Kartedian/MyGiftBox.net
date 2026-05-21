@@ -5,10 +5,8 @@ declare(strict_types=1);
 require_once __DIR__.'/../../vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
-use Dwm\MyGiftBox\models\Coffret_type;
-use Dwm\MyGiftBox\models\Coffret2presta;
-use Dwm\MyGiftBox\models\Coffret;
-use Dwm\MyGiftBox\models\Prestation;
+use Dwm\MyGiftBox\infrastructure\Coffret;
+use Dwm\MyGiftBox\infrastructure\Coffret_type;
 
 $config = parse_ini_file(__DIR__."/../../conf/confdb.ini");
 

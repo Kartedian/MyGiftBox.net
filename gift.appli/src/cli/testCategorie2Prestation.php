@@ -5,8 +5,8 @@ declare(strict_types=1);
 require_once __DIR__.'/../../vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
-use Dwm\MyGiftBox\Models\Categorie;
-use Dwm\MyGiftBox\Models\Prestation;
+use Dwm\MyGiftBox\infrastructure\Categorie;
+use Dwm\MyGiftBox\infrastructure\Prestation;
 
 $config = parse_ini_file(__DIR__.'/../../conf/confdb.ini');
 
