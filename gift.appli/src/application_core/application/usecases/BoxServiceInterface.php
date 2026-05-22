@@ -33,4 +33,6 @@ interface BoxServiceInterface
      * @return BoxEntity[]
      */
     public function getBoxesByUser(string $userId): array;
+
+    public function getBoxes(): array;
 }
