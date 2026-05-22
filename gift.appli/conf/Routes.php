@@ -8,6 +8,7 @@ use Dwm\MyGiftBox\webui\actions\CategorieListeAction;
 use Dwm\MyGiftBox\webui\actions\CategoriePrestationListeAction;
 use Dwm\MyGiftBox\webui\actions\Coffret_typeDetailAction;
 use Dwm\MyGiftBox\webui\actions\Coffret_typeListeAction;
+use Dwm\MyGiftBox\webui\actions\ListboxviewxAction;
 use Dwm\MyGiftBox\webui\actions\PrestationDetailAction;
 use Dwm\MyGiftBox\webui\actions\PrestationListeAction;
 
@@ -21,6 +22,7 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/categorie/{id:\d+}/prestations[/]', CategoriePrestationListeAction::class)->setName('categ2presta');
     $app->get('/coffret_types[/]', Coffret_typeListeAction::class)->setName('coffret_types');
     $app->get('/coffret_type/{id:\d+}[/]', Coffret_typeDetailAction::class)->setName('coffret_type_detail');
+    $app->get('/listboxviewx[/]', ListboxviewxAction::class)->setName('listboxviewx');
 
     // Box (Exercice 2 – utilisation d'une box)
     $app->get('/box/{id}/token[/]', BoxTokenAction::class)->setName('box_token');

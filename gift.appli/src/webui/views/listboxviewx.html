@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block title %}List Box View - MyGiftBox{% endblock %}
+
+{% block content %}
+    <h1>List Box View</h1>
+    <div class="listbox-container">
+        <ul class="listbox">
+            {% for item in items %}
+                <li class="listbox-item">
+                    <a href="{{ url_for('item_detail', {'id': item.id}) }}">{{ item.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
