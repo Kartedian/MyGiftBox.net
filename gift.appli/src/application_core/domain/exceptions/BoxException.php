@@ -15,4 +15,9 @@ class BoxException extends RuntimeException
     {
         return new self("Le token fourni est invalide ou ne correspond à aucune box.");
     }
+
+    public static function erreurRecuperation(string $message)
+    {
+        return new self("Erreur box : {$message}");
+    }
 }
