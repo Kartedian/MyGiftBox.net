@@ -3,14 +3,12 @@
 {% block title %}List Box View - MyGiftBox{% endblock %}
 
 {% block content %}
-    <h1>List Box View</h1>
-    <div class="listbox-container">
+    <h1>Liste des boxes</h1>
         <ul class="listbox">
-            {% for item in items %}
+            {% for b in box_liste %}
                 <li class="listbox-item">
-                    <a href="{{ url_for('item_detail', {'id': item.id}) }}">{{ item.name }}</a>
+                    <a href="{{ url_for('box_token', {'id': b.id}) }}">{{ b.libelle }}</a>
                 </li>
             {% endfor %}
         </ul>
-    </div>
 {% endblock %}
