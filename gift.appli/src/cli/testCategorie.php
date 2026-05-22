@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../models/Categorie.php';
+require_once __DIR__ . '/../infrastructure/Prestation.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
-use Dwm\MyGiftBox\Models\Categorie;
+use Dwm\MyGiftBox\infrastructure\Categorie;
 
 $config = parse_ini_file(__DIR__ . '/../../conf/confdb.ini');
 
