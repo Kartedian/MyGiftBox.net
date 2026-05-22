@@ -123,4 +123,26 @@ class BoxService implements BoxServiceInterface
             prestations: $prestations,
         );
     }
+
+    public function getBoxes(): array
+    {
+        try{
+            return Box::orderBy('id')->get()->map(fn($box) => new BoxEntity(
+                id:          $box->id,
+                token:       $box->token,
+                libelle:     $box->libelle,
+                description: $box->description,
+                montant:     (float) $box->montant,
+                kdo:         (bool) $box->kdo,
+                message_kdo: $box->message_kdo,
+                statut:      $box->statut,
+                created_at:  $box->created_at,
+                createur_id: $box->createur_id,
+                prestations: [],
+            ))->all();
+        }
+        catch (Throwable $e){
+            throw BoxException::erreurRecuperation("impossible de charger la liste des boxes : {$e->getMessage()}");
+        }
+    }
 }
