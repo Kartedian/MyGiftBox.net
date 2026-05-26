@@ -15,7 +15,7 @@
 {% set lien = url_for('box_detail', {'token': token}) %}
 <p>
     <strong>Lien d'accès :</strong><br>
-    <a href="{{ lien }}">{{ lien }}</a>
+    <a href="{{ lien }}?token={{token}}">{{ lien }}?token={{token}}</a>
 </p>
 
 <p><em>Ce lien est personnel et ne doit être partagé qu'avec le destinataire.</em></p>

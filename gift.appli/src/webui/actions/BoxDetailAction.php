@@ -22,7 +22,10 @@ class BoxDetailAction
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $token = $args['token'];
+        $token = $request->getQueryParams()['token'] ?? null;
+        if ($token === null) {
+            throw new HttpNotFoundException($request, "Token de box manquant");
+        }
 
         try {
             $box = $this->boxService->getBoxByToken($token);

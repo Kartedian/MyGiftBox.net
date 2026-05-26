@@ -28,7 +28,7 @@ return function (\Slim\App $app): \Slim\App {
     // Box (Exercice 2 – utilisation d'une box)
     $app->get('/boxes[/]', BoxListeAction::class)->setName('boxes');
     $app->get('/box/{id}/token[/]', BoxTokenAction::class)->setName('box_token');
-    $app->get('/box/{token:.+}', BoxDetailAction::class)->setName('box_detail');
+    $app->get('/box/detail[/]', BoxDetailAction::class)->setName('box_detail');
 
     return $app;
 };
