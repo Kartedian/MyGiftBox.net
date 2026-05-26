@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends "base.twig" %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Création d'une box</title>
-</head>
+{% block title %}Accueil - MyGiftBox{% endblock %}
 
-<body>
-
-    <h1>Créer une nouvelle box</h1>
+{% block content %}
+<h1>Créer une nouvelle box</h1>
 
 <form method="post" action="{{ url_for('boxe_create') }}">
     <div>
@@ -20,23 +15,23 @@
         <textarea id="description" name="description" rows="4"></textarea>
     </div>
 
-        <div>
-            <p id="prestationCount">0 prestation(s) ajoutée(s)</p>
+    <div>
+        <p id="prestationCount">0 prestation(s) ajoutée(s)</p>
 
-        </div>
+    </div>
 
-        <div id="prestationsContainer">
-            <!-- Les prestations ajoutées seront affichées ici -->
-
-
-        </div>
+    <div id="prestationsContainer">
+        <!-- Les prestations ajoutées seront affichées ici -->
 
 
+    </div>
 
-        <div>
-            <label for="kdo">Cadeau ?</label>
-            <input type="checkbox" id="kdo" name="kdo">
-        </div>
+
+
+    <div>
+        <label for="kdo">Cadeau ?</label>
+        <input type="checkbox" id="kdo" name="kdo">
+    </div>
 
     <div>
         <label id="montant">Montant total (€) :</label><br>
