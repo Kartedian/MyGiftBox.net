@@ -1,6 +1,7 @@
 <?php
 
 use Dwm\MyGiftBox\webui\actions\AccueilAction;
+use Dwm\MyGiftBox\webui\actions\BoxCreerAction;
 use Dwm\MyGiftBox\webui\actions\BoxDetailAction;
 use Dwm\MyGiftBox\webui\actions\BoxTokenAction;
 use Dwm\MyGiftBox\webui\actions\CategorieDetailAction;
@@ -27,8 +28,9 @@ return function (\Slim\App $app): \Slim\App {
 
     // Box (Exercice 2 – utilisation d'une box)
     $app->get('/boxes[/]', BoxListeAction::class)->setName('boxes');
-    $app->get('/box/{id}/token[/]', BoxTokenAction::class)->setName('box_token');
-    $app->get('/box/detail[/]', BoxDetailAction::class)->setName('box_detail');
+    $app->get('/box/{id}/token[/]', BoxTokenAction::class)->setName('boxe_token');
+    $app->get('/box/detail[/]', BoxDetailAction::class)->setName('boxe_detail');
+    $app->get('/box/create[/]', BoxCreerAction::class)->setName('boxe_create');
 
     return $app;
 };
