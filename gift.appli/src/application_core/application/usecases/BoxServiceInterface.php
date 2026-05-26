@@ -35,4 +35,19 @@ interface BoxServiceInterface
     public function getBoxesByUser(string $userId): array;
 
     public function getBoxes(): array;
+
+    /**
+     * Crée une nouvelle box avec les données fournies, associée à l'utilisateur créateur (optionnel).
+     * Lève BoxException en cas de données invalides ou de problème lors de la création.
+     * Retourne la box créée sous forme d'entité..
+     * 
+     * @param string $libelle Le libellé de la box (obligatoire)
+     * @param string|null $description La description de la box (optionnelle)
+     * @param bool $kdo Indique si la box est un cadeau (true) ou non (false)
+     * @param string|null $message_kdo Le message de cadeau associé à la box, si c'est un cadeau (optionnel)
+     * @param string|null $createurId L'identifiant de l'utilisateur créateur de la box (optionnel, peut être déterminé à partir du contexte de l'application)
+     * @return BoxEntity L'entité représentant la box créée
+     * @throws BoxException Si les données sont invalides ou si la création échoue pour une raison quelconque
+     */
+    public function createBox(string $libelle, ?string $description, bool $kdo, ?string $message_kdo, ?string $createurId): BoxEntity;
 }

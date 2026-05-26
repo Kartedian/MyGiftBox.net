@@ -32,5 +32,8 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/box/detail[/]', BoxDetailAction::class)->setName('boxe_detail');
     $app->get('/box/create[/]', BoxCreerAction::class)->setName('boxe_create');
 
+    
+    $app->post('/box/create[/]', BoxCreerAction::class);
+
     return $app;
 };

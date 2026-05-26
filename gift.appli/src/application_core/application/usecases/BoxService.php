@@ -44,34 +44,38 @@ class BoxService implements BoxServiceInterface
         return $this->toEntity($box);
     }
 
-    public function genererToken(string $boxId): string
+    public function genererToken(?string $boxId): string
     {
-        try {
-            $box = Box::findOrFail($boxId);
-        } catch (ModelNotFoundException) {
-            throw new EntityNotFoundException('Box', $boxId);
-        } catch (Throwable $e) {
-            throw new \RuntimeException("Erreur lors de la récupération de la box {$boxId} : {$e->getMessage()}", 0, $e);
-        }
+        if ($boxId !== null) {
+            try {
+                $box = Box::findOrFail($boxId);
+            } catch (ModelNotFoundException) {
+                throw new EntityNotFoundException('Box', $boxId);
+            } catch (Throwable $e) {
+                throw new \RuntimeException("Erreur lors de la récupération de la box {$boxId} : {$e->getMessage()}", 0, $e);
+            }
 
-        if ($box->statut !== Box::STATUT_ACTIF) {
-            throw BoxException::nonUtilisable($boxId);
-        }
+            if ($box->statut !== Box::STATUT_ACTIF) {
+                throw BoxException::nonUtilisable($boxId);
+            }
 
-        // Le token existe déjà : on le retourne directement.
-        if (!empty($box->token)) {
-            return $box->token;
-        }
+            // Le token existe déjà : on le retourne directement.
+            if (!empty($box->token)) {
+                return $box->token;
+            }
+        
 
-        // Génère un nouveau token sécurisé et le persiste.
-        try {
-            $token = bin2hex(random_bytes(32));
-            $box->token = $token;
-            $box->save();
-        } catch (Throwable $e) {
-            throw new \RuntimeException("Erreur lors de la génération du token : {$e->getMessage()}", 0, $e);
+            // Génère un nouveau token sécurisé et le persiste.
+            try {
+                $token = base64_encode(random_bytes(32));
+                $box->token = $token;
+                $box->save();
+            } catch (Throwable $e) {
+                throw new \RuntimeException("Erreur lors de la génération du token : {$e->getMessage()}", 0, $e);
+            }
+        } else {
+            $token = base64_encode(random_bytes(32));
         }
-
         return $token;
     }
 
@@ -87,6 +91,52 @@ class BoxService implements BoxServiceInterface
         } catch (Throwable $e) {
             throw new \RuntimeException("Erreur lors de la récupération des boxes de l'utilisateur {$userId} : {$e->getMessage()}", 0, $e);
         }
+    }
+
+
+    // TODO: Vérrifier la lib elloquante + ajout verif uid
+    private function generateUuidV4(): string
+    {
+        $data = random_bytes(16);
+        $data[6] = chr((ord($data[6]) & 0x0f) | 0x40);
+        $data[8] = chr((ord($data[8]) & 0x3f) | 0x80);
+    
+        $hex = bin2hex($data);
+    
+        return sprintf(
+            '%s-%s-%s-%s-%s',
+            substr($hex, 0, 8),
+            substr($hex, 8, 4),
+            substr($hex, 12, 4),
+            substr($hex, 16, 4),
+            substr($hex, 20, 12)
+        );
+    }
+
+    public function createBox(string $libelle, ?string $description, bool $kdo, ?string $message_kdo, ?string $createurId): BoxEntity
+    {
+        try {
+            $id = $this->generateUuidV4();
+            $token = $this->genererToken(null);
+
+            $now = date('Y-m-d H:i:s');
+
+            $box = Box::create([
+                'id' => $id,
+                'token' => $token,
+                'libelle' => $libelle,
+                'description' => $description,
+                'kdo' => $kdo,
+                'message_kdo' => $message_kdo,
+                'statut' => Box::STATUT_BROUILLON,
+                'created_at' => $now,
+                'createur_id' => $createurId,
+            ]);
+        } catch (Throwable $e) {
+            throw new \RuntimeException("Erreur lors de la création de la box : {$e->getMessage()}", 0, $e);
+        }
+
+        return $this->toEntity($box);
     }
 
     // -------------------------------------------------------------------------

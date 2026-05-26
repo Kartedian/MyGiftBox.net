@@ -12,6 +12,19 @@ class Box extends Model
     public $incrementing = false;
     public $timestamps = false;
 
+    protected $fillable = [
+        'id',
+        'token',
+        'libelle',
+        'description',
+        'montant',
+        'kdo',
+        'message_kdo',
+        'statut',
+        'created_at',
+        'createur_id',
+    ];
+
     const STATUT_BROUILLON    = 1;
     const STATUT_EN_ATTENTE   = 2;
     const STATUT_PAYE         = 3;
