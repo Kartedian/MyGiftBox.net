@@ -7,7 +7,7 @@
         <ul class="listbox">
             {% for b in box_liste %}
                 <li class="listbox-item">
-                    <a href="{{ url_for('box_token', {'id': b.id}) }}">{{ b.libelle }}</a>
+                    <a href="{{ url_for('boxe_token', {'id': b.id}) }}">{{ b.libelle }}</a>
                 </li>
             {% endfor %}
         </ul>
