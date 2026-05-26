@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Liste des boxes</h1>
+    <a href="{{ url_for('boxe_create') }}">Creer box</a>
         <ul class="listbox">
             {% for b in box_liste %}
                 <li class="listbox-item">
