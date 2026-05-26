@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Box – {{ box.libelle }}</title>
-</head>
-<body>
+{% extends "base.twig" %}
+
+{% block title %}Accueil - MyGiftBox{% endblock %}
+
+{% block content %}
 <h1>{{ box.libelle }}</h1>
 
 {% if box.kdo and box.message_kdo %}
@@ -37,5 +35,4 @@
 {% else %}
     <p>Aucune prestation associée à cette box.</p>
 {% endif %}
-</body>
-</html>
+{% endblock %}
