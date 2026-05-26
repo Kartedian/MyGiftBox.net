@@ -11,6 +11,6 @@ class AccueilAction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'accueil.twig');
+        return $view->render($response, 'Accueil.twig');
     }
 }

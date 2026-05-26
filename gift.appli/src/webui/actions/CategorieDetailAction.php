@@ -28,6 +28,6 @@ class CategorieDetailAction
         }
 
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'categorie.twig', $categorie);
+        return $view->render($response, 'Categorie.twig', $categorie);
     }
 }
