@@ -59,22 +59,11 @@ class BoxService implements BoxServiceInterface
                 throw BoxException::nonUtilisable($boxId);
             }
 
-            // Le token existe déjà : on le retourne directement.
-            if (!empty($box->token)) {
-                return $box->token;
-            }
-        
-
-            // Génère un nouveau token sécurisé et le persiste.
-            try {
-                $token = base64_encode(random_bytes(32));
-                $box->token = $token;
-                $box->save();
-            } catch (Throwable $e) {
-                throw new \RuntimeException("Erreur lors de la génération du token : {$e->getMessage()}", 0, $e);
-            }
+            return $box->token;
         } else {
-            $token = base64_encode(random_bytes(32));
+            do {
+                $token = base64_encode(random_bytes(32));
+            }while(Box::with('prestations')->where('token', $token)->first() !== null);
         }
         return $token;
     }
