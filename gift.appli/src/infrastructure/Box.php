@@ -2,12 +2,15 @@
 
 namespace Dwm\MyGiftBox\infrastructure;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Box extends Model
 {
+    use HasUuids;
+
     protected $table = 'box';
-    protected $primaryKey = 'id';
+    //protected $primaryKey = 'id';
     public $keyType = 'string';
     public $incrementing = false;
     public $timestamps = false;

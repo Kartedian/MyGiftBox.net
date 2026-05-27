@@ -2,13 +2,17 @@
 
 namespace Dwm\MyGiftBox\infrastructure;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class Prestation extends Model
 {
+    use HasUuids;
+
     protected $table = 'prestation';
-    protected $primaryKey = 'id';
+    //protected $primaryKey = 'id';
     public $timestamps = false;
+    public $incrementing = false;
     public $keyType = 'string';
 
     public function categorie()
