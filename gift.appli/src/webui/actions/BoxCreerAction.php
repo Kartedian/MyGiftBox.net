@@ -2,6 +2,7 @@
 
 namespace Dwm\MyGiftBox\webui\actions;
 use Dwm\MyGiftBox\application_core\application\usecases\BoxService;
+use Dwm\MyGiftBox\webui\provider\CsrfTokenProvider;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
@@ -11,6 +12,12 @@ class BoxCreerAction
     public function __invoke(Request $request, Response $response, array $args){
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
+            $csrfToken = $data['csrf_token'] ?? null;
+            if (!CsrfTokenProvider::validateToken($csrfToken)) {
+                $response->getBody()->write('Token CSRF invalide');
+                error_log("Tentative de création de box avec token CSRF invalide : " . json_encode($data));
+                return $response->withStatus(403);
+            }
             if(empty($data['libelle'])) {
                 $response->getBody()->write('Données manquantes');
                 error_log("Données de création de box manquantes : " . json_encode($data));
@@ -37,6 +44,8 @@ class BoxCreerAction
         }
         
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'BoxCreateView.html', []);
+        return $view->render($response, 'BoxCreateView.html', [
+            'csrf_token' => CsrfTokenProvider::generateToken(),
+        ]);
     }
 }
