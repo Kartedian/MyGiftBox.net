@@ -1,5 +1,9 @@
 <?php
 
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
+
 use Dwm\MyGiftBox\application_core\application\usecases\CatalogueService;
 use Dwm\MyGiftBox\application_core\application\usecases\CatalogueServiceInterface;
 use Dwm\MyGiftBox\application_core\application\usecases\BoxService;
