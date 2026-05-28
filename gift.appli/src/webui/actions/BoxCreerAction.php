@@ -6,6 +6,8 @@ use Dwm\MyGiftBox\webui\provider\CsrfTokenProvider;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
+use Slim\Exception\HttpBadRequestException;
+use Slim\Exception\HttpInternalServerErrorException;
 
 class BoxCreerAction
 {
@@ -13,15 +15,8 @@ class BoxCreerAction
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
             $csrfToken = $data['csrf_token'] ?? null;
-            if (!CsrfTokenProvider::validateToken($csrfToken)) {
-                $response->getBody()->write('Token CSRF invalide');
-                error_log("Tentative de création de box avec token CSRF invalide : " . json_encode($data));
-                return $response->withStatus(403);
-            }
-            if(empty($data['libelle'])) {
-                $response->getBody()->write('Données manquantes');
-                error_log("Données de création de box manquantes : " . json_encode($data));
-                return $response->withStatus(400);
+            if (!CsrfTokenProvider::validateToken($csrfToken) || empty($data['libelle'])) {
+                throw new HttpBadRequestException($request, 'Données de création de box invalides');
             }
 
             $libelle = $data['libelle'];
@@ -34,9 +29,8 @@ class BoxCreerAction
                 $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, null);
                 error_log("Box créée avec succès : " . json_encode($box));
             } catch (\Exception $e) {
-                $response->getBody()->write('Erreur lors de la création de la box : ' . $e->getMessage());
                 error_log("Erreur lors de la création de la box : " . $e->getMessage());
-                return $response->withStatus(500);
+                throw new HttpInternalServerErrorException($request, 'Erreur lors de la création de la box');
             }
 
 
