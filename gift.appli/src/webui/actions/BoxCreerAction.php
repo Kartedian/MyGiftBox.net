@@ -8,9 +8,17 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
+use Dwm\MyGiftBox\application_core\application\usecases\CatalogueService;
 
 class BoxCreerAction
 {
+    private $catalogue;
+
+    public function __construct(CatalogueService $catalogue)
+    {
+        $this->catalogue = $catalogue;
+    }
+
     public function __invoke(Request $request, Response $response, array $args){
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
@@ -23,10 +31,11 @@ class BoxCreerAction
             $description = $data['description'] ?? null;
             $kdo = $data['kdo'] ?? false;
             $message_kdo = $data['message_kdo'] ?? null;
+            $coffretType = $data['coffretType'] ?? null;
 
             try {
                 $boxService = new BoxService();
-                $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, null);
+                $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, $coffretType);
                 error_log("Box créée avec succès : " . json_encode($box));
             } catch (\Exception $e) {
                 error_log("Erreur lors de la création de la box : " . $e->getMessage());
@@ -40,6 +49,7 @@ class BoxCreerAction
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxCreateView.html', [
             'csrf_token' => CsrfTokenProvider::generateToken(),
+            'coffret_type_liste' =>$this->catalogue->getThemesCoffrets(),
         ]);
     }
 }
