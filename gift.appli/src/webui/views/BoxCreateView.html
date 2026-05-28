@@ -16,6 +16,16 @@
     </div>
 
     <div>
+        <label for="coffretType" >Type de coffret :</label><br>
+        <select id="coffretType" name="coffretType" required>
+            <option value="">--Sélectionnez un type--</option>
+            {% for p in coffret_type_liste %}
+            <option value="{{ p.id }}">{{ p.libelle }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div>
         <p id="prestationCount">0 prestation(s) ajoutée(s)</p>
     </div>
 
