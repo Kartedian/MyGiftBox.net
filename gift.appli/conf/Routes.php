@@ -13,8 +13,17 @@ use Dwm\MyGiftBox\webui\actions\ListboxviewxAction;
 use Dwm\MyGiftBox\webui\actions\PrestationDetailAction;
 use Dwm\MyGiftBox\webui\actions\PrestationListeAction;
 use Dwm\MyGiftBox\webui\actions\BoxListeAction;
+use Dwm\MyGiftBox\webui\actions\LoginAction;
+use Dwm\MyGiftBox\webui\actions\RegisterAction;
 
 return function (\Slim\App $app): \Slim\App {
+    // Authentification
+    $app->get('/register[/]', RegisterAction::class)->setName('register');
+    $app->post('/register[/]', RegisterAction::class);
+    $app->get('/login[/]', LoginAction::class)->setName('login');
+    $app->post('/login[/]', LoginAction::class);
+
+
     // Catalogue
     $app->get('[/]', AccueilAction::class)->setName('accueil');
     $app->get('/categories[/]', CategorieListeAction::class)->setName('categories');

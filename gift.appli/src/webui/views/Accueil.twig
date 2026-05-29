@@ -5,6 +5,7 @@
 {% block content %}
     <h2>Bienvenue sur MyGiftBox.net</h2>
     <p>Ceci est la page d'accueil de l'application.</p>
+    <p>id user = {{ user_id }}</p>
     <ul>
         <li><a href="{{ url_for('categories') }}">Liste des catégories</a></li>
         <li><a href="{{ url_for('prestations') }}">Liste des prestations</a></li>

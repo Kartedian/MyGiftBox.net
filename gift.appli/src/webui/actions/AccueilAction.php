@@ -11,6 +11,8 @@ class AccueilAction
     public function __invoke(Request $request, Response $response, array $args): Response
     {
         $view = Twig::fromRequest($request);
-        return $view->render($response, 'Accueil.twig');
+        return $view->render($response, 'Accueil.twig', [
+            'user_id' => $_SESSION['user_id'] ?? null
+        ]);
     }
 }

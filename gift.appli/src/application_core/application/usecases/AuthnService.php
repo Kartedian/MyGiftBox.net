@@ -10,8 +10,9 @@ class AuthnService implements AuthnServiceInterface
     {
         try {
             $user = new User();
-            $user->email = $email;
+            $user->user_id = $email;
             $user->password = password_hash($password, PASSWORD_DEFAULT);
+            $user->role = 1;
             return $user->save();
         } catch (\Exception $e) {
                 throw new \Exception("Erreur lors de l'enregistrement de l'utilisateur : " . $e->getMessage(), 0, $e);
@@ -21,7 +22,7 @@ class AuthnService implements AuthnServiceInterface
     public static function authenticate(string $email, string $password): bool
     {
         try {
-            $user = User::where('email', $email)->first();
+            $user = User::where('user_id', $email)->first();
             if ($user && password_verify($password, $user->password)) {
                 $_SESSION['user_id'] = $user->id;
                 return true;

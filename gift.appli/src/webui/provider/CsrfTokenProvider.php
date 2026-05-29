@@ -6,7 +6,6 @@ class CsrfTokenProvider
     /**
      * Génère un token CSRF sécurisé et le stocke en session.
      * @return string Le token généré
-     * @throws \Exception Si une erreur survient lors de la génération du token
      */
     public static function generateToken(): string
     {
