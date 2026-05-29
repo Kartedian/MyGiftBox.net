@@ -20,6 +20,10 @@ class BoxCreerAction
     }
 
     public function __invoke(Request $request, Response $response, array $args){
+        $coffretId = $request->getQueryParams()['coffret'] ?? null;
+        if ($coffretId !== null)
+            $coffret = $this->catalogue->getCoffretById($coffretId);
+
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
             $csrfToken = $data['csrf_token'] ?? null;
