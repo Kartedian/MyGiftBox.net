@@ -52,6 +52,7 @@ class BoxCreerAction
         
         $view = Twig::fromRequest($request);
         return $view->render($response, 'BoxCreateView.html', [
+            'coffret' => $coffret ?? null,
             'csrf_token' => CsrfTokenProvider::generateToken(),
             'coffret_type_liste' =>$this->catalogue->getThemesCoffrets(),
         ]);
