@@ -17,7 +17,7 @@
             </li>
         {% endfor %}
     </ul>
-    {% set lien = url_for('box_create', {'coffret': coffret}) %}
+    {% set lien = url_for('boxe_create', {'coffret': coffret}) %}
     <a href="{{ lien }}?coffret={{ id }}">Creer nouvelle box</a>
 
 {% endblock %}
