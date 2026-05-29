@@ -17,7 +17,8 @@ services:
     networks:
       - gift.net
     depends_on:
-      - sql
+      sql:
+        condition: service_healthy
     command: sh -c "composer install && php -S 0.0.0.0:80 -t /var/php/public /var/php/public/router.php"
 
 
@@ -28,14 +29,18 @@ services:
     image: mariadb:latest
     env_file:
       - .database_env
-    ports:
-      - "3306:3306"
     volumes:
       - voldb:/var/lib/mysql
     networks:
       gift.net:
         aliases:
           - sql.db
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
 
   adminer:
     image: adminer

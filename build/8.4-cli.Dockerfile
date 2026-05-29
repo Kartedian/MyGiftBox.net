@@ -1,10 +1,8 @@
 # Use an official PHP runtime as a base image
-FROM php:8.4-cli
+FROM php:8.5-cli-alpine
 
 # basic update
-RUN apt-get update && \
-    apt-get install --yes --force-yes \
-    cron openssl
+RUN apk add --no-cache openssl
 
 # installing the docker php extensions installer
 RUN curl -sSLf \
@@ -13,12 +11,9 @@ RUN curl -sSLf \
     chmod +x /usr/local/bin/install-php-extensions
 
 # PHP Configuration
-RUN install-php-extensions  gettext iconv intl  tidy zip sockets
-RUN install-php-extensions  pgsql mysqli
-RUN install-php-extensions  pdo_mysql pdo_pgsql
-RUN install-php-extensions  xdebug
-RUN install-php-extensions  redis
-RUN install-php-extensions @composer
+RUN install-php-extensions gettext iconv intl tidy zip sockets \
+    pgsql mysqli pdo_mysql pdo_pgsql \
+    xdebug redis @composer
 EXPOSE 80
 
 
