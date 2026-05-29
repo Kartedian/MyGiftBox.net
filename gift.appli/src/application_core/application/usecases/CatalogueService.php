@@ -140,4 +140,16 @@ class CatalogueService implements CatalogueServiceInterface
             ])->all(),
         ];
     }
+
+    public function getPrestationsByCoffretId(int $id):array{
+        try{
+            $coffretType = Coffret_type::find($id);
+        }catch (ModelNotFoundException $e){
+            throw new EntityNotFoundException('Coffret_type', $id);
+        }catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("erreur lors de la recuperation du coffret-type {$id}: {$e->getMessage()}");
+        }
+        
+        return $coffretType->prestations->toArray();
+    }
 }
