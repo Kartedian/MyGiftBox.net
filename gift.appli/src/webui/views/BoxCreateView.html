@@ -34,13 +34,52 @@
         <p id="prestationCount">0 prestation(s) ajoutée(s)</p>
     </div>
 
-    <div id="prestationsContainer">
-        <!-- Les prestations ajoutées seront affichées ici -->
+    <div id="prestations-container"></div>
 
+    <script>
+        // 1. On cible les bons ID correspondant exactement à ton HTML
+        const selector = document.getElementById('coffretType');
+        const container = document.getElementById('prestations-container');
+        const countDisplay = document.getElementById('prestationCount');
 
-    </div>
+        selector.addEventListener('change', async (e) => {
+            const coffretId = e.target.value;
 
+            if (!coffretId) {
+                container.innerHTML = '';
+                countDisplay.textContent = '0 prestation(s) ajoutée(s)'; // Remise à zéro
+                return;
+            }
 
+            container.innerHTML = '<em>Chargement des prestations...</em>';
+
+            try {
+                const response = await fetch(`/api/coffrets/${coffretId}/prestations`);
+
+                if (!response.ok) {
+                    throw new Error('Erreur réseau');
+                }
+
+                const prestations = await response.json();
+
+                let html = '<ul>';
+                prestations.forEach(p => {
+                    // Note : assure-toi que 'libelle' correspond bien au nom de la colonne dans ta base
+                    html += `<li>${p.libelle}</li>`;
+                });
+                html += '</ul>';
+
+                container.innerHTML = html;
+
+                // 2. Mise à jour dynamique du texte du compteur
+                countDisplay.textContent = `${prestations.length} prestation(s) ajoutée(s)`;
+
+            } catch (error) {
+                container.innerHTML = "<p>Erreur lors du chargement des prestations.</p>";
+                countDisplay.textContent = '0 prestation(s) ajoutée(s)';
+            }
+        });
+    </script>
 
     <div>
         <label for="kdo">Cadeau ?</label>
