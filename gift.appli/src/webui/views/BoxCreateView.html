@@ -18,6 +18,9 @@
     <div>
         <label for="coffretType" >Type de coffret :</label><br>
         <select id="coffretType" name="coffretType" required>
+            {% if coffret != null %}
+            <option value="{{ coffret.id }}">{{ coffret.libelle  }}</option>
+            {% endif %}
             <option value="">--Sélectionnez un type--</option>
             {% for p in coffret_type_liste %}
             <option value="{{ p.id }}">{{ p.libelle }}</option>
