@@ -25,6 +25,7 @@
             {% for p in coffret_type_liste %}
             {% if coffret == null or p.id!=coffret.id %}
             <option value="{{ p.id }}">{{ p.libelle }}</option>
+            {% endif %}
             {% endfor %}
         </select>
     </div>
