@@ -1,12 +1,13 @@
 <?php
 
 namespace Dwm\MyGiftBox\application_core\application\usecases;
+
 use Dwm\MyGiftBox\application_core\application\usecases\AuthnServiceInterface;
 use Dwm\MyGiftBox\infrastructure\User;
 
 class AuthnService implements AuthnServiceInterface
 {
-    public static function register(string $email, string $password): bool
+    public static function register(string $email, string $password)
     {
         try {
             $user = new User();
@@ -14,32 +15,21 @@ class AuthnService implements AuthnServiceInterface
             $user->password = password_hash($password, PASSWORD_DEFAULT);
             $user->role = 1;
             return $user->save();
-        } catch (\Exception $e) {
-                throw new \Exception("Erreur lors de l'enregistrement de l'utilisateur : " . $e->getMessage(), 0, $e);
+        } catch (\Exception $e) { //TODO: faire c'est propre Exception
+            throw new \Exception();
         }
     }
 
-    public static function authenticate(string $email, string $password): bool
+    public static function authenticate(string $email, string $password)
     {
         try {
             $user = User::where('user_id', $email)->first();
             if ($user && password_verify($password, $user->password)) {
-                $_SESSION['user_id'] = $user->id;
-                return true;
+                return ['user_id' => $user->id, 'role' => $user->role];
             }
             return false;
-        } catch (\Exception $e) {
-            throw new \Exception("Erreur lors de l'authentification de l'utilisateur : " . $e->getMessage(), 0, $e);
-        }
-    }
-
-    public static function logout(): void
-    {
-        try {
-            session_unset();
-            session_destroy();
-        } catch (\Exception $e) {
-            throw new \Exception("Erreur lors de la déconnexion de l'utilisateur : " . $e->getMessage(), 0, $e);
+        } catch (\Exception $e) { //TODO: faire c'est propre Exception
+            throw new \Exception();
         }
     }
 }

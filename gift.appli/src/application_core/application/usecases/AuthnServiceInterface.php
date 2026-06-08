@@ -9,19 +9,12 @@ interface AuthnServiceInterface
      * @return bool Retourne true si l'enregistrement est réussi, sinon false.
      * @throws \Exception Si une erreur survient lors de l'enregistrement de l'utilisateur.
      */
-    public static function register(string $email, string $password): bool;
+    public static function register(string $email, string $password);
     
     /**
      * Authentifie un utilisateur avec le nom d'utilisateur et le mot de passe fournis.
-     * @return bool Retourne true si l'authentification est réussie, sinon false.
+     * @return array Returns an array with user_id and role if authentication is successful, otherwise false.
      * @throws \Exception Si une erreur survient lors de l'authentification de l'utilisateur.
      */
-    public static function authenticate(string $email, string $password): bool;
-
-    /**
-     * Déconnecte l'utilisateur actuellement authentifié.
-     * @return void
-     * @throws \Exception Si une erreur survient lors de la déconnexion de l'utilisateur.
-     */
-    public static function logout(): void;
+    public static function authenticate(string $email, string $password);
 }

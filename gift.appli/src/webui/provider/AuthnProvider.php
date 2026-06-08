@@ -13,11 +13,33 @@ class AuthnProvider
 
     public static function authenticate(string $email, string $password): bool
     {
-        return AuthnService::authenticate($email, $password);
+        $res = AuthnService::authenticate($email, $password);
+        if ($res) {
+            $_SESSION['user_id'] = $res['user_id'];
+            $_SESSION['role'] = $res['role'];
+            return true;
+        }
+        return false;
     }
 
     public static function logout(): void
     {
-        AuthnService::logout();
+        $_SESSION = [];
+        session_destroy();
+    }
+
+    public static function isAuthenticated(): bool
+    {
+        return isset($_SESSION['user_id']);
+    }
+
+    public static function getUserId(): ?int
+    {
+        return $_SESSION['user_id'] ?? null;
+    }
+
+    public static function getUserRole(): ?int
+    {
+        return $_SESSION['role'] ?? null;
     }
 }
