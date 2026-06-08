@@ -20,4 +20,9 @@ class BoxException extends RuntimeException
     {
         return new self("Erreur box : {$message}");
     }
+
+    public static function brouillonIntrouvable(string $boxId): self
+    {
+        return new self("Aucune box au statut 'brouillon' trouvée avec l'ID '{$boxId}'.");
+    }
 }
