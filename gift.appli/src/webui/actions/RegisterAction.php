@@ -18,11 +18,12 @@ class RegisterAction
 
             if ($email && $password) {
                 try {
-                    if (AuthnProvider::register($email, $password)) {
+                    if (AuthnProvider::register($email, $password)) { //TODO: utiliser slim
                         return $response
                             ->withHeader('Location', '/login')
-                            ->withStatus(302);
+                            ->withStatus(302); // Redirige vers la page de connexion après une inscription réussie
                     } else {
+///////////////// Message d'erreur en cas d'échec de l'inscription ///////////////
                         $view = Twig::fromRequest($request);
                         return $view->render($response, 'Register.html', ['error' => 'L\'inscription a échoué']);
                     }
@@ -35,6 +36,7 @@ class RegisterAction
                 return $view->render($response, 'Register.html', ['error' => 'Veuillez remplir tous les champs']);
             }
         }
+        // Affiche le formulaire d'inscription
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Register.html');
     }

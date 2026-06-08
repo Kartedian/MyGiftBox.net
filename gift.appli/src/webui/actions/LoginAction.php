@@ -18,11 +18,12 @@ class LoginAction
 
             if ($email && $password) {
                 try {
-                    if (AuthnProvider::authenticate($email, $password)) {
+                    if (AuthnProvider::authenticate($email, $password)) { 
                         return $response
                             ->withHeader('Location', '/')
-                            ->withStatus(302);
+                            ->withStatus(302); // Redirige vers la page d'accueil après une connexion réussie
                     } else {
+/////////////// Message d'erreur en cas d'échec de l'authentification ///////////////
                         $view = Twig::fromRequest($request);
                         return $view->render($response, 'Login.html', ['error' => 'Email ou mot de passe incorrect']);
                     }
@@ -35,6 +36,7 @@ class LoginAction
                 return $view->render($response, 'Login.html', ['error' => 'Veuillez remplir tous les champs']);
             }
         }
+        // Affiche le formulaire de connexion
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Login.html');
     }
