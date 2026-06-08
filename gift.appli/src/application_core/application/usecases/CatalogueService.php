@@ -152,4 +152,25 @@ class CatalogueService implements CatalogueServiceInterface
         
         return $coffretType->prestations->toArray();
     }
+
+    public function getPrestations(): array
+    {
+        try {
+            return Prestation::orderBy('id')
+                ->get()
+                ->map(fn($p) => new PrestationEntity(
+                    $p->id,
+                    $p->libelle,
+                    $p->description,
+                    $p->url,
+                    $p->unite,
+                    (float) $p->tarif,
+                    $p->img,
+                    $p->cat_id,
+                ))
+                ->all();
+        } catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("impossible de charger la liste des prestations : {$e->getMessage()}");
+        }
+    }
 }

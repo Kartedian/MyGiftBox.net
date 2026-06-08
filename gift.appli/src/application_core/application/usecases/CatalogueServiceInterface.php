@@ -23,4 +23,6 @@ interface CatalogueServiceInterface
     public function getCoffretById(int $id): array;
 
     public function getPrestationsByCoffretId(int $id);
+
+    public function getPrestations(): array;
 }
