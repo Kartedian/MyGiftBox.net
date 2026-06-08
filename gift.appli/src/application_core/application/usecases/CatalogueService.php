@@ -173,4 +173,26 @@ class CatalogueService implements CatalogueServiceInterface
             throw CatalogueException::erreurRecuperation("impossible de charger la liste des prestations : {$e->getMessage()}");
         }
     }
+
+    public function getPrestationsByCategoryId(int $categoryId): array
+    {
+        try {
+            return Prestation::where('cat_id', $categoryId)
+                ->orderBy('id')
+                ->get()
+                ->map(fn($p) => new PrestationEntity(
+                    $p->id,
+                    $p->libelle,
+                    $p->description,
+                    $p->url,
+                    $p->unite,
+                    (float) $p->tarif,
+                    $p->img,
+                    $p->cat_id,
+                ))
+                ->all();
+        } catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("impossible de charger les prestations de la catégorie {$categoryId} : {$e->getMessage()}");
+        }
+    }
 }
