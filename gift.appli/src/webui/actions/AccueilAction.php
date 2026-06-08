@@ -5,6 +5,7 @@ namespace Dwm\MyGiftBox\webui\actions;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
+use Dwm\MyGiftBox\webui\provider\AuthnProvider;
 
 class AccueilAction
 {
@@ -12,7 +13,7 @@ class AccueilAction
     {
         $view = Twig::fromRequest($request);
         return $view->render($response, 'Accueil.twig', [
-            'user_id' => $_SESSION['user_id'] ?? null
+            'user_id' => AuthnProvider::getUserId()
         ]);
     }
 }

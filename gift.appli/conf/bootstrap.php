@@ -13,6 +13,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
 use Slim\Views\TwigMiddleware;
+use Dwm\MyGiftBox\webui\provider\AuthnProvider;
 
 // --- Base de données ----------------------------------------------------------
 $config = parse_ini_file(__DIR__ . '/confdb.ini');
@@ -34,6 +35,9 @@ $app = AppFactory::create();
 // --- Vues Twig ----------------------------------------------------------------
 $twig = Twig::create(__DIR__ . '/../src/webui/views', ['cache' => false]);
 $app->add(TwigMiddleware::create($app, $twig));
+
+// Ajout d'une variable globale pour vérifier l'authentification dans les templates Twig
+$twig->getEnvironment()->addGlobal('isAuthenticated', AuthnProvider::isAuthenticated());
 
 // --- Middlewares --------------------------------------------------------------
 $app->addRoutingMiddleware();

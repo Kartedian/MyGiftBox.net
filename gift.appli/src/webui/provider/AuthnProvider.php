@@ -33,7 +33,7 @@ class AuthnProvider
         return isset($_SESSION['user_id']);
     }
 
-    public static function getUserId(): ?int
+    public static function getUserId(): ?String
     {
         return $_SESSION['user_id'] ?? null;
     }

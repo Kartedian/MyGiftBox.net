@@ -16,6 +16,7 @@ use Dwm\MyGiftBox\webui\actions\BoxListeAction;
 use Dwm\MyGiftBox\webui\actions\LoginAction;
 use Dwm\MyGiftBox\webui\actions\RegisterAction;
 use Dwm\MyGiftBox\api\GetPrestationByCoffretApi;
+use Dwm\MyGiftBox\webui\actions\LogoutAction;
 
 return function (\Slim\App $app): \Slim\App {
     // Authentification
@@ -23,6 +24,7 @@ return function (\Slim\App $app): \Slim\App {
     $app->post('/register[/]', RegisterAction::class);
     $app->get('/login[/]', LoginAction::class)->setName('login');
     $app->post('/login[/]', LoginAction::class);
+    $app->get('/logout[/]', LogoutAction::class)->setName('logout');
 
 
     // Catalogue

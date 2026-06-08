@@ -80,6 +80,9 @@
 				<li><a href="{{ url_for('boxes') }}">Boxes</a></li>
 				<li><a href="{{url_for('register') }}">S'enregistrer</a></li>
 				<li><a href="{{url_for('login') }}">Connexion</a></li>
+				{% if isAuthenticated %}
+				<li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+				{% endif %}
 			</ul>
 		</nav>
 
