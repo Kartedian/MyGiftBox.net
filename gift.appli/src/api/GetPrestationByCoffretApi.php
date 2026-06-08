@@ -1,14 +1,15 @@
 <?php
 
-namespace Dwm\MyGiftBox\webui\actions;
+namespace Dwm\MyGiftBox\api;
 use Dwm\MyGiftBox\application_core\application\usecases\CatalogueServiceInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class GetPrestationApiAction
+class GetPrestationByCoffretApi
 {
     public function __construct(private readonly CatalogueServiceInterface $catalogue)
     {
+        
     }
 
     public function __invoke(Request $request, Response $response, array $args):Response{

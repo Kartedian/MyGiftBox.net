@@ -15,6 +15,7 @@ use Dwm\MyGiftBox\webui\actions\PrestationListeAction;
 use Dwm\MyGiftBox\webui\actions\BoxListeAction;
 use Dwm\MyGiftBox\webui\actions\LoginAction;
 use Dwm\MyGiftBox\webui\actions\RegisterAction;
+use Dwm\MyGiftBox\api\GetPrestationByCoffretApi;
 
 return function (\Slim\App $app): \Slim\App {
     // Authentification
@@ -40,7 +41,9 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/box/{id}/token[/]', BoxTokenAction::class)->setName('boxe_token');
     $app->get('/box/detail[/]', BoxDetailAction::class)->setName('boxe_detail');
     $app->get('/box/create[/]', BoxCreerAction::class)->setName('boxe_create');
-    $app->get('/api/coffrets/{id}/prestations', \Dwm\MyGiftBox\webui\actions\GetPrestationApiAction::class)->setName('api_coffret_prestations');;
+
+    // API
+    $app->get('/api/coffrets/{id}/prestations', GetPrestationByCoffretApi::class)->setName('api_coffret_prestations');;
 
     
     $app->post('/box/create[/]', BoxCreerAction::class);

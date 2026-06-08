@@ -42,8 +42,8 @@
         const container = document.getElementById('prestations-container');
         const countDisplay = document.getElementById('prestationCount');
 
-        selector.addEventListener('change', async (e) => {
-            const coffretId = e.target.value;
+        async function loadCoffretPrestations() {
+            coffretId = selector.value;
 
             if (!coffretId) {
                 container.innerHTML = '';
@@ -78,7 +78,11 @@
                 container.innerHTML = "<p>Erreur lors du chargement des prestations.</p>";
                 countDisplay.textContent = '0 prestation(s) ajoutée(s)';
             }
-        });
+        }
+
+        selector.addEventListener('change', loadCoffretPrestations);
+
+        loadCoffretPrestations(); // Appel initial pour charger les prestations si un coffret est déjà sélectionné
     </script>
 
     <div>
