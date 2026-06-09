@@ -163,11 +163,11 @@ class BoxService implements BoxServiceInterface
         }
     }
 
-    public static function addPrestationToBox(string $prestationId): void
+    public static function addPrestationToBox(string $boxId, string $prestationId, int $qt): void
     {
         try {
-            $box = Box::where('statut', Box::STATUT_BROUILLON)->firstOrFail();
-            if ($box->statut !== Box::STATUT_BROUILLON) {
+            $box = Box::findOrFail($boxId);
+            if (!$box) {
                 throw BoxException::nonUtilisable($box->id);
             }
             //$boxToPresta = $box->prestations()->where('id', $prestationId)->first();
@@ -178,10 +178,10 @@ class BoxService implements BoxServiceInterface
 
                 $box->prestations()->updateExistingPivot(
                     $prestationId,
-                    ['quantite' => $pivot->pivot->quantite + 1]
+                    ['quantite' => $pivot->pivot->quantite += $qt]
                 );
             } else {
-                $box->prestations()->attach($prestationId, ['quantite' => 1]);
+                $box->prestations()->attach($prestationId, ['quantite' => $qt]);
             }
         } catch (ModelNotFoundException) {
             throw BoxException::brouillonIntrouvable($box->id ?? null);
