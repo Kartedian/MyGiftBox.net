@@ -27,6 +27,7 @@ class BoxCreerAction
 
         if ($request->getMethod() === 'POST') {
             $data = $request->getParsedBody();
+            $prestations = $data['prestations'] ?? [];
             $csrfToken = $data['csrf_token'] ?? null;
             if (!CsrfTokenProvider::validateToken($csrfToken) || empty($data['libelle'])) {
                 throw new HttpBadRequestException($request, 'Données de création de box invalides');
@@ -41,6 +42,13 @@ class BoxCreerAction
             try {
                 $boxService = new BoxService();
                 $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, AuthnProvider::getUserId());
+
+                foreach ($prestations as $pId => $qt){
+                    if((int) $qt != 0)
+                        BoxService::addPrestationToBox($box->id, $pId, $qt);
+                }
+
+
                 error_log("Box créée avec succès : " . json_encode($box));
             } catch (\Exception $e) {
                 error_log("Erreur lors de la création de la box : " . $e->getMessage());
