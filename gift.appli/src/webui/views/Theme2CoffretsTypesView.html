@@ -1,0 +1,16 @@
+{% extends "Base.twig" %}
+
+{% block title %}Theme {{ id }}{% endblock %}
+
+{% block content %}
+
+<h1>{{libelle}}: Liste des Coffrets Types</h1>
+<ul>
+    {% for c in listeCoffretType %}
+    <li>
+        <a href="{{ url_for('coffret_type_detail', {'id': c.id}) }}">{{c.libelle}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
