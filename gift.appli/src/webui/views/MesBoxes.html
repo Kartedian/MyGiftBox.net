@@ -16,7 +16,7 @@
             {{ b.libelle }}
         </a>
         <form method="post" action="{{ url_for('add_presta_to_box', {'id': prestation_id}) }}">
-            <button type="submit" class="addPrestationToBoxBtn" data-box-id="{{ b.id }}">
+            <button type="submit" name="add_box" value="{{ b.id }}" class="addPrestationToBoxBtn">
                 Ajouter à cette box
             </button>
             <input type="hidden" name="presta_id" value="{{ prestation_id }}">
