@@ -1,0 +1,14 @@
+{% extends "Base.twig" %}
+
+{% block title %}Liste des themes - MyGiftBox{% endblock %}
+
+{% block content %}
+    <h1>Liste des themes</h1>
+    <ul>
+        {% for t in theme_liste %}
+        <li>
+            <a href="{{ url_for('theme_detail', {'id': t.id}) }}">{{ t.libelle }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
