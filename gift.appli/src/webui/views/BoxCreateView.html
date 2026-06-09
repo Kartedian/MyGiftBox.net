@@ -62,12 +62,23 @@
 
                 const prestations = await response.json();
 
-                let html = '<ul>';
+                let html = '<div class="prestations-quantites" style="margin-top: 15px;">';
+
                 prestations.forEach(p => {
-                    // Note : assure-toi que 'libelle' correspond bien au nom de la colonne dans ta base
-                    html += `<li>${p.libelle}</li>`;
+                    html += `
+                <div style="margin-bottom: 10px; display: flex; align-items: center;">
+                    <input
+                        type="number"
+                        name="prestations[${p.id}]"
+                        value="1"
+                        min="0"
+                        style="width: 60px; margin-right: 10px;"
+                    >
+                    <label>${p.libelle}</label>
+                </div>
+            `;
                 });
-                html += '</ul>';
+                html += '</div>';
 
                 container.innerHTML = html;
 
