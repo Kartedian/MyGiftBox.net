@@ -1,20 +1,20 @@
 <?php
 
-namespace Dwm\MyGiftBox\api;
+namespace dwm\MyGiftBox\api;
 
 use Dwm\MyGiftBox\application_core\application\usecases\CatalogueServiceInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-class GetPrestationByCoffretApi
+class GetPrestationByCategoriesApi
 {
     public function __construct(private readonly CatalogueServiceInterface $catalogue) {}
 
     public function __invoke(Request $request, Response $response, array $args): Response
     {
-        $coffretId = (int) $args['id'];
+        $categoryId = (int) $args['id'];
 
-        $prestaions = $this->catalogue->getPrestationsByCoffretId($coffretId);
+        $prestaions = $this->catalogue->getPrestationsByCategoryId($categoryId);
 
         $payload = json_encode($prestaions);
 
