@@ -29,7 +29,7 @@ class AddPrestationToBoxAction
             }
 
             try {
-                BoxService::addPrestationToBox($prestationId);
+                BoxService::addPrestationToBox($data['add_box'], $prestationId, 1);
             } catch (BoxException $e) {
                 throw new HttpInternalServerErrorException($request, 'Erreur lors de l\'ajout de la prestation à la box : ' . $e->getMessage());
             }
