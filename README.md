@@ -108,3 +108,35 @@ Les mots de passe en base de données sont hashés (bcrypt). Étant donné que l
 * *soirée romantique* : `OTYzYNVZo6OOhucGes0/O2KUZgH2ed5S5CkooEQ0Qk0=`
 * *quos dolorem libero* : `twmyDtNlmtC0hsxZ6fEw0+maTTfrDEqNH0gjBhTo3BI=`
 * *ab exercitationem modi* : `yuGnXxfjEFzPzZLaSPIUQbY0rvz3sXTXG9uliZKrsHs=`
+
+---
+
+## Installation (Déploiement local)
+
+Ce projet est conteneurisé avec **Docker** afin de garantir une installation simple, rapide et identique sur n'importe quel système d'exploitation (Windows, macOS, Linux).
+
+### Prérequis
+Avant de commencer, assurez-vous d'avoir installé les logiciels suivants sur votre machine :
+* [Git](https://git-scm.com/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (qui inclut Docker Compose)
+
+### Étapes d'installation
+
+**1. Cloner le dépôt**
+Ouvrez un terminal et clonez ce dépôt public sur votre machine, puis déplacez-vous dans le dossier du projet :
+```bash
+git clone [https://github.com/Kartedian/MyGiftBox.net](https://github.com/Kartedian/MyGiftBox.net)
+cd MyGiftBox
+```
+
+**2. Démarrer les services Docker**
+Lancez la construction et le démarrage des conteneurs en arrière-plan à l'aide de Docker Compose :
+```Bash
+docker-compose up -d --build
+```
+
+**3. Installer les dépendances (Composer)**
+Une fois les conteneurs démarrés, il faut installer les dépendances PHP du projet (Slim, Twig, Eloquent, etc.). Exécutez cette commande pour lancer Composer à l'intérieur du conteneur de l'application :
+```bash
+docker-compose exec app composer install
+```
