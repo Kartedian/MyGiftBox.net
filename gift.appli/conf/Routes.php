@@ -20,6 +20,9 @@ use Dwm\MyGiftBox\webui\actions\LogoutAction;
 use Dwm\MyGiftBox\webui\actions\AddPrestationToBoxAction;
 use Dwm\MyGiftBox\webui\actions\MesBoxViewAction;
 use Dwm\MyGiftBox\api\GetPrestationApi;
+use Dwm\MyGiftBox\webui\actions\Theme2CoffretsTypeAction;
+use Dwm\MyGiftBox\webui\actions\ThemeDetailAction;
+use Dwm\MyGiftBox\webui\actions\ThemesListeAction;
 use Dwm\MyGiftBox\api\GetCategoriesApi;
 use Dwm\MyGiftBox\api\GetPrestationByCategoriesApi;
 use Dwm\MyGiftBox\api\GetBoxByIdApi;
@@ -43,6 +46,9 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/coffret_types[/]', Coffret_typeListeAction::class)->setName('coffret_types');
     $app->get('/coffret_type/{id:\d+}[/]', Coffret_typeDetailAction::class)->setName('coffret_type_detail');
     $app->get('/listboxviewx[/]', ListboxviewxAction::class)->setName('listboxviewx');
+    $app->get('/themes[/]', ThemesListeAction::class)->setName('themes');
+    $app->get('/theme/{id:\d+}[/]', ThemeDetailAction::class)->setName('theme_detail');
+    $app->get('/theme/{id:\d+}/coffret_types[/]', Theme2CoffretsTypeAction::class)->setName('theme2coffret-type');
 
     // Box (Exercice 2 – utilisation d'une box)
     $app->get('/boxes[/]', BoxListeAction::class)->setName('boxes');
@@ -50,7 +56,7 @@ return function (\Slim\App $app): \Slim\App {
     $app->get('/box/detail[/]', BoxDetailAction::class)->setName('boxe_detail');
     $app->get('/box/create[/]', BoxCreerAction::class)->setName('boxe_create');
     $app->get('/prestation/{id}/MesBoxes', MesBoxViewAction::class)->setName('add_presta_to_box');
-   
+
     // API
     $app->get('/api/prestations', GetPrestationApi::class)->setName('api_prestations');
     $app->get('/api/coffrets/{id}/prestations', GetPrestationByCoffretApi::class)->setName('api_coffret_prestations');
