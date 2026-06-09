@@ -26,5 +26,11 @@ interface CatalogueServiceInterface
 
     public function getPrestations(): array;
 
+    public function getThemes(): array;
+
+    public function getThemeById(int $id): array;
+
+    public function getCoffretByThemeId(int $id):array;
+
     public function getPrestationsByCategoryId(int $categoryId): array;
 }
