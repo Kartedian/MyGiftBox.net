@@ -3,15 +3,23 @@
 {% block title %}Catégorie {{ id }}{% endblock %}
 
 {% block content %}
-    <h1>La Prestation {{ id }}</h1>
-    <h2>{{ libelle }}</h2>
-    <h3>Description:</h3>
-    <p>{{ description }}</p>
-    <h3>Url:</h3>
-    <p>{{ url }}</p>
-    <h3>Unite:</h3>
-    <p>{{ unite }}</p>
-    <h3>Tarif:</h3>
-    <p>{{ tarif }}</p>
+<h1>La Prestation {{ id }}</h1>
+<h2>{{ libelle }}</h2>
+<h3>Description:</h3>
+<p>{{ description }}</p>
+<h3>Url:</h3>
+<p>{{ url }}</p>
+<h3>Unite:</h3>
+<p>{{ unite }}</p>
+<h3>Tarif:</h3>
+<p>{{ tarif }}</p>
+<button id="add-to-box-btn" data-presta-id="{{ id }}">Ajouter à une box</button>
+
+<script>
+    document.getElementById('add-to-box-btn').addEventListener('click', function () {
+        const prestaId = this.getAttribute('data-presta-id');
+        window.location.href = `/prestation/${prestaId}/MesBoxes`;
+    });
+</script>
 
 {% endblock %}

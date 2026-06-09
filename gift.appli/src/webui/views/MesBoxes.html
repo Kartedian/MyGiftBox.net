@@ -1,0 +1,30 @@
+{% extends "Base.twig" %}
+
+{% block title %}Mes Boxes - MyGiftBox{% endblock %}
+
+{% block content %}
+
+<h1>Liste de mes boxes</h1>
+<h2>Ajouter la prestation "{{ prestation_id }}" à une box</h2>
+{% if boxUser is empty %}
+<p>Aucune box disponible.</p>
+{% endif %}
+<ul class="listbox">
+    {% for b in boxUser %}
+    <li class="listbox-item">
+        <a href="{{ url_for('boxe_token', {'id': b.id}) }}">
+            {{ b.libelle }}
+        </a>
+        <form method="post" action="{{ url_for('add_presta_to_box', {'id': prestation_id}) }}">
+            <button type="submit" class="addPrestationToBoxBtn" data-box-id="{{ b.id }}">
+                Ajouter à cette box
+            </button>
+            <input type="hidden" name="presta_id" value="{{ prestation_id }}">
+            <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token }}">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

@@ -9,6 +9,7 @@ use Dwm\MyGiftBox\application_core\domain\exceptions\EntityNotFoundException;
 use Dwm\MyGiftBox\infrastructure\Box;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
+use Illuminate\Support\Facades\DB;
 
 class BoxService implements BoxServiceInterface
 {
@@ -63,7 +64,7 @@ class BoxService implements BoxServiceInterface
         } else {
             do {
                 $token = base64_encode(random_bytes(32));
-            }while(Box::with('prestations')->where('token', $token)->first() !== null);
+            } while (Box::with('prestations')->where('token', $token)->first() !== null);
         }
         return $token;
     }
@@ -127,15 +128,15 @@ class BoxService implements BoxServiceInterface
             : [];
 
         return new BoxEntity(
-            id:          $box->id,
-            token:       $box->token,
-            libelle:     $box->libelle,
+            id: $box->id,
+            token: $box->token,
+            libelle: $box->libelle,
             description: $box->description,
-            montant:     (float) $box->montant,
-            kdo:         (bool) $box->kdo,
+            montant: (float) $box->montant,
+            kdo: (bool) $box->kdo,
             message_kdo: $box->message_kdo,
-            statut:      $box->statut,
-            created_at:  $box->created_at,
+            statut: $box->statut,
+            created_at: $box->created_at,
             createur_id: $box->createur_id,
             prestations: $prestations,
         );
@@ -143,23 +144,49 @@ class BoxService implements BoxServiceInterface
 
     public function getBoxes(): array
     {
-        try{
+        try {
             return Box::orderBy('id')->get()->map(fn($box) => new BoxEntity(
-                id:          $box->id,
-                token:       $box->token,
-                libelle:     $box->libelle,
+                id: $box->id,
+                token: $box->token,
+                libelle: $box->libelle,
                 description: $box->description,
-                montant:     (float) $box->montant,
-                kdo:         (bool) $box->kdo,
+                montant: (float) $box->montant,
+                kdo: (bool) $box->kdo,
                 message_kdo: $box->message_kdo,
-                statut:      $box->statut,
-                created_at:  $box->created_at,
+                statut: $box->statut,
+                created_at: $box->created_at,
                 createur_id: $box->createur_id,
                 prestations: [],
             ))->all();
-        }
-        catch (Throwable $e){
+        } catch (Throwable $e) {
             throw BoxException::erreurRecuperation("impossible de charger la liste des boxes : {$e->getMessage()}");
+        }
+    }
+
+    public static function addPrestationToBox(string $prestationId): void
+    {
+        try {
+            $box = Box::where('statut', Box::STATUT_BROUILLON)->firstOrFail();
+            if ($box->statut !== Box::STATUT_BROUILLON) {
+                throw BoxException::nonUtilisable($box->id);
+            }
+            //$boxToPresta = $box->prestations()->where('id', $prestationId)->first();
+            if ($box->prestations()->where('id', $prestationId)->exists()) {
+                $pivot = $box->prestations()
+                    ->where('id', $prestationId)
+                    ->first();
+
+                $box->prestations()->updateExistingPivot(
+                    $prestationId,
+                    ['quantite' => $pivot->pivot->quantite + 1]
+                );
+            } else {
+                $box->prestations()->attach($prestationId, ['quantite' => 1]);
+            }
+        } catch (ModelNotFoundException) {
+            throw BoxException::brouillonIntrouvable($box->id ?? null);
+        } catch (Throwable $e) {
+            throw new \RuntimeException("Erreur lors de l'ajout de la prestation à la box : {$e->getMessage()}", 0, $e);
         }
     }
 }

@@ -9,6 +9,7 @@ use Slim\Views\Twig;
 use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
 use Dwm\MyGiftBox\application_core\application\usecases\CatalogueService;
+use Dwm\MyGiftBox\webui\provider\AuthnProvider;
 
 class BoxCreerAction
 {
@@ -39,7 +40,7 @@ class BoxCreerAction
 
             try {
                 $boxService = new BoxService();
-                $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, $coffretType);
+                $box = $boxService->createBox($libelle, $description, $kdo, $message_kdo, AuthnProvider::getUserId());
                 error_log("Box créée avec succès : " . json_encode($box));
             } catch (\Exception $e) {
                 error_log("Erreur lors de la création de la box : " . $e->getMessage());
