@@ -1,0 +1,12 @@
+{% extends "Base.twig" %}
+
+{% block title %}Catégorie {{ id }}{% endblock %}
+
+{% block content %}
+    <h1>Theme: {{ id }}</h1>
+    <h2>{{ libelle }}</h2>
+    <p>{{ description }}</p>
+    <ul>
+        <li><a href="{{ url_for('theme2coffret-type', {'id': id}) }}">Liste des Coffrets Types</a></li>
+    </ul>
+{% endblock %}
