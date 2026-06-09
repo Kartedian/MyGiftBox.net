@@ -11,6 +11,7 @@ use Dwm\MyGiftBox\application_core\domain\exceptions\EntityNotFoundException;
 use Dwm\MyGiftBox\infrastructure\Categorie;
 use Dwm\MyGiftBox\infrastructure\Coffret_type;
 use Dwm\MyGiftBox\infrastructure\Prestation;
+use Dwm\MyGiftBox\infrastructure\Theme;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Throwable;
 
@@ -172,6 +173,55 @@ class CatalogueService implements CatalogueServiceInterface
         } catch (Throwable $e) {
             throw CatalogueException::erreurRecuperation("impossible de charger la liste des prestations : {$e->getMessage()}");
         }
+    }
+
+    public function getThemes(): array{
+        try{
+            return Theme::orderBy('id')->get()->map(fn($t) => new ThemeEntity(
+                $t->id,
+                $t->libelle,
+                $t->description,
+            ))->all();
+        }
+        catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("impossible de charger la liste des themes : {$e->getMessage()}");
+        }
+    }
+
+    public function getThemeById(int $id): array{
+        try{
+            $t = Theme::findOrFail($id);
+        } catch (ModelNotFoundException) {
+            throw new EntityNotFoundException('Theme', $id);
+        } catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("erreur lors de la récupération du theme {$id} : {$e->getMessage()}");
+        }
+
+        return [
+            'id'            => $t->id,
+            'libelle'       => $t->libelle,
+            'description'   => $t->description
+        ];
+    }
+
+    public function getCoffretByThemeId(int $id):array{
+        try{
+            return Coffret_type::where('theme_id', $id)
+                ->get()
+                ->map(fn($c) => new Coffret_typeEntity(
+                    $c->id,
+                    $c->libelle,
+                    $c->description,
+                    $c->theme_id,
+                    null,
+                    [],
+                ))
+                ->all();
+        }
+        catch (Throwable $e) {
+            throw CatalogueException::erreurRecuperation("impossible de charger la liste des coffrets (theme_id) : {$e->getMessage()}");
+        }
+
     }
 
     public function getPrestationsByCategoryId(int $categoryId): array
